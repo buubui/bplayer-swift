@@ -1,0 +1,22 @@
+PODS:
+  - Player (0.14.0)
+
+DEPENDENCIES:
+  - Player (from `https://github.com/buubui/Player`, branch `ios-11`)
+
+EXTERNAL SOURCES:
+  Player:
+    :branch: ios-11
+    :git: https://github.com/buubui/Player
+
+CHECKOUT OPTIONS:
+  Player:
+    :commit: 966c92d11cdaf82a7ba8e2160bf2b4aa16ad53be
+    :git: https://github.com/buubui/Player
+
+SPEC CHECKSUMS:
+  Player: 4f8c299a4ab807c3ca52a098995db8c584ff8781
+
+PODFILE CHECKSUM: 4cfd2dd76eb277b022101f18248a6c4a4d997be6
+
+COCOAPODS: 1.10.1
