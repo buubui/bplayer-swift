@@ -5,17 +5,21 @@
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17703"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
-        <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="CLPlayerController" customModule="BPlayer" customModuleProvider="target">
             <connections>
+                <outlet property="bottomControlsView" destination="YE9-CA-IkV" id="ceq-Bf-trp"/>
+                <outlet property="closeButton" destination="AyE-2c-7MJ" id="gQC-no-YZy"/>
                 <outlet property="controlsContainerView" destination="FqO-Sx-DXO" id="Tld-IP-DSH"/>
+                <outlet property="currentTimeLabel" destination="tc8-AA-A3v" id="DNw-fA-LGk"/>
+                <outlet property="endClassButton" destination="krA-jm-T4y" id="v6k-WH-r2E"/>
                 <outlet property="playButton" destination="KiT-9P-gxs" id="qAT-FJ-MA8"/>
                 <outlet property="playerContainerView" destination="ShD-Ye-s03" id="lbF-bI-rjP"/>
                 <outlet property="progressSlider" destination="Pkz-Tu-k0A" id="dHD-pQ-iMo"/>
                 <outlet property="qualityButton" destination="vwk-cz-AdE" id="mms-ap-Z8d"/>
+                <outlet property="topControlsView" destination="QxY-d7-GRI" id="akV-bi-KWA"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
         </placeholder>
@@ -31,85 +35,134 @@
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="FqO-Sx-DXO" userLabel="Controls View">
                     <rect key="frame" x="0.0" y="39" width="414" height="818"/>
                     <subviews>
-                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="dOD-Op-VTj">
-                            <rect key="frame" x="0.0" y="718" width="414" height="100"/>
+                        <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="2" translatesAutoresizingMaskIntoConstraints="NO" id="YE9-CA-IkV" userLabel="Bottom Controls Stack View">
+                            <rect key="frame" x="10" y="736" width="394" height="82"/>
                             <subviews>
-                                <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" minValue="0.0" maxValue="1" translatesAutoresizingMaskIntoConstraints="NO" id="Pkz-Tu-k0A">
-                                    <rect key="frame" x="8" y="10" width="398" height="31"/>
-                                    <connections>
-                                        <action selector="progressSliderValueChanged:" destination="-1" eventType="valueChanged" id="ugM-bW-5RE"/>
-                                    </connections>
-                                </slider>
+                                <stackView opaque="NO" contentMode="scaleToFill" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="mLR-SA-BYD">
+                                    <rect key="frame" x="0.0" y="0.0" width="394" height="30"/>
+                                    <subviews>
+                                        <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" minValue="0.0" maxValue="1" translatesAutoresizingMaskIntoConstraints="NO" id="Pkz-Tu-k0A">
+                                            <rect key="frame" x="-2" y="0.0" width="347" height="31"/>
+                                            <connections>
+                                                <action selector="progressSliderValueChanged:" destination="-1" eventType="valueChanged" id="ugM-bW-5RE"/>
+                                            </connections>
+                                        </slider>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="752" text="00:00" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tc8-AA-A3v">
+                                            <rect key="frame" x="348" y="0.0" width="46" height="30"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                            <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                    </subviews>
+                                </stackView>
                                 <stackView opaque="NO" contentMode="scaleToFill" spacing="9" translatesAutoresizingMaskIntoConstraints="NO" id="zF8-JE-UqP">
-                                    <rect key="frame" x="8" y="62" width="259" height="30"/>
+                                    <rect key="frame" x="0.0" y="32" width="394" height="50"/>
                                     <subviews>
                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5yU-j8-gO7">
-                                            <rect key="frame" x="0.0" y="0.0" width="51" height="30"/>
-                                            <state key="normal" title="Rewind"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
+                                            <state key="normal" title="Rewind">
+                                                <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                            </state>
                                             <connections>
                                                 <action selector="rewindButtonTapped:" destination="-1" eventType="touchUpInside" id="HIQ-EV-tJJ"/>
                                             </connections>
                                         </button>
                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="KiT-9P-gxs">
-                                            <rect key="frame" x="60" y="0.0" width="30" height="30"/>
-                                            <state key="normal" title="Play"/>
+                                            <rect key="frame" x="59" y="0.0" width="30" height="50"/>
+                                            <state key="normal" title="Play">
+                                                <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                            </state>
                                             <connections>
                                                 <action selector="playButtonTapped:" destination="-1" eventType="touchUpInside" id="tU3-OL-QHf"/>
                                             </connections>
                                         </button>
                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="sDp-Mq-daS">
-                                            <rect key="frame" x="99" y="0.0" width="56" height="30"/>
-                                            <state key="normal" title="Forward"/>
+                                            <rect key="frame" x="98" y="0.0" width="56" height="50"/>
+                                            <state key="normal" title="Forward">
+                                                <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                            </state>
                                             <connections>
                                                 <action selector="forwardButtonTapped:" destination="-1" eventType="touchUpInside" id="vOB-uW-Ico"/>
                                             </connections>
                                         </button>
+                                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="FXq-cj-UOi" userLabel="Spaceing">
+                                            <rect key="frame" x="163" y="0.0" width="50" height="50"/>
+                                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        </view>
+                                        <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vwk-cz-AdE">
+                                            <rect key="frame" x="217.5" y="0.0" width="0.0" height="50"/>
+                                            <state key="normal" title="Quality">
+                                                <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                            </state>
+                                            <connections>
+                                                <action selector="qualityButtonTapped:" destination="-1" eventType="touchUpInside" id="U28-3v-zys"/>
+                                            </connections>
+                                        </button>
                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Dw6-Fl-Tnk">
-                                            <rect key="frame" x="164" y="0.0" width="42" height="30"/>
-                                            <state key="normal" title="Mirror"/>
+                                            <rect key="frame" x="222" y="0.0" width="42" height="50"/>
+                                            <state key="normal" title="Mirror">
+                                                <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                            </state>
                                             <connections>
                                                 <action selector="mirrorButtonTapped:" destination="-1" eventType="touchUpInside" id="qQ3-FP-UxQ"/>
                                             </connections>
                                         </button>
                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="sA8-jY-Kek">
-                                            <rect key="frame" x="215" y="0.0" width="44" height="30"/>
-                                            <state key="normal" title="Speed"/>
+                                            <rect key="frame" x="273" y="0.0" width="44" height="50"/>
+                                            <state key="normal" title="Speed">
+                                                <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                            </state>
                                             <connections>
                                                 <action selector="speedButtonTapped:" destination="-1" eventType="touchUpInside" id="p8y-lx-4pk"/>
                                             </connections>
                                         </button>
-                                        <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vwk-cz-AdE">
-                                            <rect key="frame" x="259" y="0.0" width="0.0" height="30"/>
-                                            <state key="normal" title="Quality"/>
+                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="krA-jm-T4y">
+                                            <rect key="frame" x="326" y="0.0" width="68" height="50"/>
+                                            <state key="normal" title="End Class">
+                                                <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                            </state>
                                             <connections>
-                                                <action selector="qualityButtonTapped:" destination="-1" eventType="touchUpInside" id="U28-3v-zys"/>
+                                                <action selector="closeButtonTapped:" destination="-1" eventType="touchUpInside" id="e9W-ql-NDe"/>
+                                                <action selector="speedButtonTapped:" destination="-1" eventType="touchUpInside" id="Vqx-ID-D97"/>
                                             </connections>
                                         </button>
                                     </subviews>
                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 </stackView>
                             </subviews>
-                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                            <constraints>
-                                <constraint firstAttribute="bottom" secondItem="zF8-JE-UqP" secondAttribute="bottom" constant="8" id="ASu-EN-xN5"/>
-                                <constraint firstItem="Pkz-Tu-k0A" firstAttribute="top" secondItem="dOD-Op-VTj" secondAttribute="top" constant="10" id="Abh-YO-OpS"/>
-                                <constraint firstAttribute="height" constant="100" id="Egs-6S-qcB"/>
-                                <constraint firstItem="Pkz-Tu-k0A" firstAttribute="leading" secondItem="dOD-Op-VTj" secondAttribute="leading" constant="10" id="SBw-IA-8pL"/>
-                                <constraint firstItem="zF8-JE-UqP" firstAttribute="leading" secondItem="dOD-Op-VTj" secondAttribute="leading" constant="8" id="sas-E0-gB8"/>
-                                <constraint firstAttribute="trailing" secondItem="Pkz-Tu-k0A" secondAttribute="trailing" constant="10" id="vkY-Qd-mfJ"/>
-                            </constraints>
-                        </view>
+                        </stackView>
+                        <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="QxY-d7-GRI" userLabel="Top Controls Stack View">
+                            <rect key="frame" x="374" y="0.0" width="30" height="48"/>
+                            <subviews>
+                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="AyE-2c-7MJ">
+                                    <rect key="frame" x="0.0" y="0.0" width="30" height="48"/>
+                                    <fontDescription key="fontDescription" type="system" pointSize="30"/>
+                                    <state key="normal" title="✕">
+                                        <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    </state>
+                                    <connections>
+                                        <action selector="closeButtonTapped:" destination="-1" eventType="touchUpInside" id="4Th-4M-Z00"/>
+                                    </connections>
+                                </button>
+                            </subviews>
+                        </stackView>
                     </subviews>
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <gestureRecognizers/>
                     <constraints>
-                        <constraint firstAttribute="bottom" secondItem="dOD-Op-VTj" secondAttribute="bottom" id="IMl-Y6-jIP"/>
-                        <constraint firstItem="dOD-Op-VTj" firstAttribute="leading" secondItem="FqO-Sx-DXO" secondAttribute="leading" id="REv-C2-5rR"/>
-                        <constraint firstAttribute="trailing" secondItem="dOD-Op-VTj" secondAttribute="trailing" id="srn-uI-Tmp"/>
+                        <constraint firstAttribute="bottom" secondItem="YE9-CA-IkV" secondAttribute="bottom" id="WxZ-Rq-ppm"/>
+                        <constraint firstItem="YE9-CA-IkV" firstAttribute="leading" secondItem="FqO-Sx-DXO" secondAttribute="leading" constant="10" id="YP1-AE-Ezu"/>
+                        <constraint firstAttribute="trailing" secondItem="YE9-CA-IkV" secondAttribute="trailing" constant="10" id="j15-SE-Z3G"/>
+                        <constraint firstItem="QxY-d7-GRI" firstAttribute="top" secondItem="FqO-Sx-DXO" secondAttribute="top" id="lUg-VG-V8v"/>
+                        <constraint firstAttribute="trailing" secondItem="QxY-d7-GRI" secondAttribute="trailing" constant="10" id="nGZ-EO-BCe"/>
                     </constraints>
+                    <connections>
+                        <outletCollection property="gestureRecognizers" destination="V2J-wx-Irb" appends="YES" id="N8Y-Fd-m9C"/>
+                    </connections>
                 </view>
             </subviews>
             <viewLayoutGuide key="safeArea" id="fnl-2z-Ty3"/>
-            <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+            <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
             <constraints>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="bottom" secondItem="FqO-Sx-DXO" secondAttribute="bottom" constant="5" id="3d3-SM-G6r"/>
                 <constraint firstItem="FqO-Sx-DXO" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="CEN-f8-pfK"/>
@@ -122,10 +175,10 @@
             </constraints>
             <point key="canvasLocation" x="131.8840579710145" y="120.53571428571428"/>
         </view>
+        <tapGestureRecognizer id="V2J-wx-Irb">
+            <connections>
+                <action selector="controlsViewTappped:" destination="-1" id="4DM-L4-Vfy"/>
+            </connections>
+        </tapGestureRecognizer>
     </objects>
-    <resources>
-        <systemColor name="systemBackgroundColor">
-            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-        </systemColor>
-    </resources>
 </document>

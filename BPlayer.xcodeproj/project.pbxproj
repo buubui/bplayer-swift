@@ -19,6 +19,7 @@
 		84BC34D8260C343E00D0CA9A /* HLSParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84BC34D7260C343E00D0CA9A /* HLSParser.swift */; };
 		84BC3505260DD5E400D0CA9A /* CLPlayerController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84BC3503260DD5E400D0CA9A /* CLPlayerController.swift */; };
 		84BC3506260DD5E400D0CA9A /* CLPlayerController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 84BC3504260DD5E400D0CA9A /* CLPlayerController.xib */; };
+		84BC35182611869100D0CA9A /* MPVolumeView+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84BC35172611869100D0CA9A /* MPVolumeView+Extension.swift */; };
 		B06CABB42CA531A67359B9E8 /* Pods_BPlayer_BPlayerUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F97652220010F41DA13846DA /* Pods_BPlayer_BPlayerUITests.framework */; };
 		DD9E48CD318ADBD07F854CC8 /* Pods_BPlayer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C7B46F839A65346922560116 /* Pods_BPlayer.framework */; };
 /* End PBXBuildFile section */
@@ -64,6 +65,7 @@
 		84BC34D7260C343E00D0CA9A /* HLSParser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HLSParser.swift; sourceTree = "<group>"; };
 		84BC3503260DD5E400D0CA9A /* CLPlayerController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CLPlayerController.swift; sourceTree = "<group>"; };
 		84BC3504260DD5E400D0CA9A /* CLPlayerController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CLPlayerController.xib; sourceTree = "<group>"; };
+		84BC35172611869100D0CA9A /* MPVolumeView+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MPVolumeView+Extension.swift"; sourceTree = "<group>"; };
 		A39649891C5DBC62600E3A24 /* Pods-BPlayerTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BPlayerTests.debug.xcconfig"; path = "Target Support Files/Pods-BPlayerTests/Pods-BPlayerTests.debug.xcconfig"; sourceTree = "<group>"; };
 		C7B46F839A65346922560116 /* Pods_BPlayer.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_BPlayer.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		F97652220010F41DA13846DA /* Pods_BPlayer_BPlayerUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_BPlayer_BPlayerUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -142,6 +144,7 @@
 				84BC34D7260C343E00D0CA9A /* HLSParser.swift */,
 				84BC3503260DD5E400D0CA9A /* CLPlayerController.swift */,
 				84BC3504260DD5E400D0CA9A /* CLPlayerController.xib */,
+				84BC35172611869100D0CA9A /* MPVolumeView+Extension.swift */,
 			);
 			path = BPlayer;
 			sourceTree = "<group>";
@@ -421,6 +424,7 @@
 				84BC3505260DD5E400D0CA9A /* CLPlayerController.swift in Sources */,
 				84BC34D8260C343E00D0CA9A /* HLSParser.swift in Sources */,
 				84BC344E260AFC4300D0CA9A /* AppDelegate.swift in Sources */,
+				84BC35182611869100D0CA9A /* MPVolumeView+Extension.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

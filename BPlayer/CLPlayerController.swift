@@ -16,6 +16,11 @@ class CLPlayerController: UIViewController {
   @IBOutlet weak var playButton: UIButton!
   @IBOutlet weak var qualityButton: UIButton!
   @IBOutlet weak var progressSlider: UISlider!
+  @IBOutlet weak var currentTimeLabel: UILabel!
+  @IBOutlet weak var closeButton: UIButton!
+  @IBOutlet weak var endClassButton: UIButton!
+  @IBOutlet weak var topControlsView: UIStackView!
+  @IBOutlet weak var bottomControlsView: UIStackView!
 
   override var prefersStatusBarHidden: Bool { true }
 
@@ -24,7 +29,6 @@ class CLPlayerController: UIViewController {
     didSet {
       if let url = url {
         player.url = url
-        try? AVAudioSession.sharedInstance().setCategory(.playback, mode: .default, options: [])
         player.playFromBeginning()
 
         parseHlsInfo(url: url)
@@ -51,6 +55,7 @@ class CLPlayerController: UIViewController {
 
     }
   }
+  private var hidingControlTimer: Timer?
 
   override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
     super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
@@ -71,7 +76,18 @@ class CLPlayerController: UIViewController {
 
   }
 
+  override func viewWillAppear(_ animated: Bool) {
+    super.viewWillAppear(animated)
+    setUpCloseButton()
+  }
+
+  override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
+    super.viewWillTransition(to: size, with: coordinator)
+    setUpCloseButton()
+  }
+
   func initPlayer() {
+    try? AVAudioSession.sharedInstance().setCategory(.playback, mode: .default, options: [])
     player = Player()
     player.playerDelegate = self
     player.playbackDelegate = self
@@ -81,6 +97,17 @@ class CLPlayerController: UIViewController {
     playerContainerView.addSubview(player.view)
     player.view.autoresizingMask = [.flexibleWidth, .flexibleHeight]
     player.didMove(toParent: self)
+    hideControls(true)
+  }
+
+  func setUpCloseButton() {
+    closeButton.isHidden =  UIDevice.current.orientation.isLandscape
+    endClassButton.isHidden = !closeButton.isHidden
+  }
+
+  func hideControls(_ isHidden: Bool) {
+    topControlsView.isHidden = isHidden
+    bottomControlsView.isHidden = isHidden
   }
 
   @IBAction func playButtonTapped(_ sender: Any) {
@@ -88,6 +115,18 @@ class CLPlayerController: UIViewController {
       player.pause()
     } else {
       player.playFromCurrentTime()
+    }
+  }
+
+  @IBAction func controlsViewTappped(_ sender: Any) {
+    hideControls(false)
+    bottomControlsView.isHidden = false
+    if let hidingControlTimer = hidingControlTimer {
+      hidingControlTimer.invalidate()
+    }
+    hidingControlTimer = Timer.scheduledTimer(withTimeInterval: 2, repeats: false) { [weak self] (timer) in
+      self?.topControlsView.isHidden = true
+      self?.bottomControlsView.isHidden = true
     }
   }
 
@@ -163,6 +202,10 @@ class CLPlayerController: UIViewController {
     present(alertController, animated: true, completion: nil)
   }
 
+  @IBAction func closeButtonTapped(_ sender: Any) {
+    dismiss(animated: true, completion: nil)
+  }
+
   private func reloadQualitySetting() {
     qualityButton.isHidden = hlsStreamInfos.isEmpty
   }
@@ -174,7 +217,6 @@ extension CLPlayerController: PlayerDelegate, PlayerPlaybackDelegate {
   }
 
   func playerPlaybackStateDidChange(_ player: Player) {
-    print("playerPlaybackStateDidChange", player.playbackState)
     if player.playbackState == .playing {
       playButton.setTitle("Pause", for: .normal)
     } else {
@@ -198,7 +240,8 @@ extension CLPlayerController: PlayerDelegate, PlayerPlaybackDelegate {
 
     let progress = player.currentTimeInterval / player.maximumDuration
     progressSlider.value = Float(progress)
-//    print("playerCurrentTimeDidChange: ", progress)
+    let currentSeconds = Int(player.currentTimeInterval)
+    currentTimeLabel.text = String(format: "%02d:%02d", currentSeconds / 60, currentSeconds % 60)
   }
 
   func playerPlaybackWillStartFromBeginning(_ player: Player) {
